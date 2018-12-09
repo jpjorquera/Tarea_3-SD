@@ -1,3 +1,5 @@
+package sd;
+
 public class Doctor {
     private String nombre;
     private String apellido;

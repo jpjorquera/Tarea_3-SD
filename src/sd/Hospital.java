@@ -1,3 +1,5 @@
+package sd;
+
 public class Hospital {
     public static final String ip37 = "10.6.40.177";
     public static final String ip38 = "10.6.40.178";
