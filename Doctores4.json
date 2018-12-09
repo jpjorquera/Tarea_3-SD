@@ -4,7 +4,7 @@
 		{"Nombre": "Iris","Apellido": "Diaz","Estudios": 8,"Experiencia": 5},
 		{"Nombre": "Gabriela","Apellido": "Blanco","Estudios": 7,"Experiencia": 9},
 		{"Nombre": "Omar","Apellido": "Morales","Estudios": 10,"Experiencia": 2},
-		{"Nombre": "Santiago","Apellido": "	Gallardo","Estudios": 7,"Experiencia": 3}
+		{"Nombre": "Santiago","Apellido": "Gallardo","Estudios": 7,"Experiencia": 3}
 	],
 	"Enfermero":[
 		{"Nombre": "Daniel Gutierrez"},
