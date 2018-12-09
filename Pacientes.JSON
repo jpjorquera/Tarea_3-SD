@@ -1,0 +1,82 @@
+{
+	"Paciente":[
+		{
+			"Datos Personales":
+			{
+				"Nombre": "Homero Simpson",
+				"Rut": "9.876.543-2",
+				"Edad": "40",
+				"Afecciones": ["Alcoholismo", "Alopecia"]
+			},
+			"Examenes":{
+				"Nombres":["Examen de Alcoholismo", "Examen de calvicie"],
+				"Realizado":[true,false] //tiene la misma posicion que nombre
+			},
+			
+			"Tratamientos":
+			{
+				"Nombres":["Terapia de adicción"],
+				"Completado":[false] //tiene la misma posicion que nombre
+			},
+			"Remedios":
+			{
+				"Nombres":["Paracetamol", "Shampoo"],
+				"Completado":[true, true] //tiene la misma posicion que nombre
+			}
+		},
+		
+		{
+			"Datos Personales":
+			{
+				"Nombre": "Juan Topo",
+				"Rut": "8.888.888-8",
+				"Edad": "45",
+				"Afecciones": ["Resfrio", "Miopia"]
+			},
+			"Examenes":{
+				"Nombres":["Test para la vista"],
+				"Realizado":[true] //tiene la misma posicion que nombre
+			},
+			
+			"Tratamientos":
+			{
+				"Nombres":["Lentes correctores"],
+				"Completado":[true] //tiene la misma posicion que nombre
+			},
+			"Remedios":
+			{
+				"Nombres":["Jarabe para la tos"],
+				"Completado":[false] //tiene la misma posicion que nombre
+			}
+		},
+
+		{
+			"Datos Personales":
+			{
+				"Nombre": "Perico Los-Palotes",
+				"Rut": "11.111.111-1",
+				"Edad": "36",
+				"Afecciones": ["Alergia al polen", "Caries"]
+			},
+			"Examenes":{
+				"Nombres":["Examen dental"],
+				"Realizado":[false] //tiene la misma posicion que nombre
+			},
+			
+			"Tratamientos":
+			{
+				"Nombres":["Tratamieno de alergia"],
+				"Completado":[true] //tiene la misma posicion que nombre
+			},
+			"Remedios":
+			{
+				"Nombres":["Clorfenamina Maleato"],
+				"Completado":[false] //tiene la misma posicion que nombre
+			}
+		}
+
+
+
+
+	] 
+}

@@ -1,0 +1,24 @@
+{
+	"Doctor":[
+		{"Nombre": "Noelia","Apellido": "Cabrera","Estudios": 5,"Experiencia": 9},
+		{"Nombre": "Jimena","Apellido": "Ortiz","Estudios": 5,"Experiencia": 4},
+		{"Nombre": "Nadia","Apellido": "Sanchez","Estudios": 8,"Experiencia": 3},
+		{"Nombre": "Aaron","Apellido": "Ortega","Estudios": 5,"Experiencia": 5},
+		{"Nombre": "Luis","Apellido": "Hidalgo","Estudios": 9,"Experiencia": 2}
+	],
+	"Enfermero":[
+		{"Nombre": "Javier Navarro"},
+		{"Nombre": "Luis Dominguez"},
+		{"Nombre": "Rodrigo Jimenez"},
+		{"Nombre": "Martina Diaz"},
+		{"Nombre": "Noelia Perez"}
+
+	],
+	"Paramedico":[
+		{"Nombre": "Gabriela Navarro"},
+		{"Nombre": "Beatriz Vazquez"},
+		{"Nombre": "Marina Torres"},
+		{"Nombre": "Alex Molina"},
+		{"Nombre": "Luis Leon"}
+	]
+}
