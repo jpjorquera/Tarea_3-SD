@@ -113,7 +113,7 @@ public class Hospital {
             System.out.println("En puerto: "+port);
             InetAddress address = InetAddress.getByName(host);
             socket = new Socket(address, port);
- 
+            System.out.println("Creacion exitosa del socket");
             // Enviar mensaje al servidor
             OutputStream os = socket.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(os);
