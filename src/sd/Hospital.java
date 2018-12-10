@@ -52,7 +52,7 @@ public class Hospital {
             //ServerSocket serverSocket = new ServerSocket(port);
             String host_ip = ip37;
             InetAddress address = InetAddress.getByName(host_ip);
-            ServerSocket serverSocket = new ServerSocket(port, 5, adress);
+            ServerSocket serverSocket = new ServerSocket(port, 5, address);
             System.out.println("Servidor empezado y escuchando en puerto "+port);
  
             // Servidor escucha siempre
