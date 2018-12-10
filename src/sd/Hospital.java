@@ -49,7 +49,8 @@ public class Hospital {
         // Intentar escuchar en puerto
         try {
             int port = 9090;
-            ServerSocket serverSocket = new ServerSocket(port);
+            //ServerSocket serverSocket = new ServerSocket(port);
+            ServerSocket serverSocket = new ServerSocket(port, 5, ip37);
             System.out.println("Servidor empezado y escuchando en puerto "+port);
  
             // Servidor escucha siempre
