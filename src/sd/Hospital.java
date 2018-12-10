@@ -45,12 +45,12 @@ public class Hospital {
         System.out.println("Run exitoso");
 
         // Si es maquina 37 => servidor
-        if (nMaquina == 37) {
+        if (nMaquina == 38) {
         // Intentar escuchar en puerto
         try {
             int port = 9090;
             //ServerSocket serverSocket = new ServerSocket(port);
-            String host_ip = ip37;
+            String host_ip = ip38;
             InetAddress address = InetAddress.getByName(host_ip);
             ServerSocket serverSocket = new ServerSocket(port, 10, address);
             System.out.println("Servidor empezado y escuchando en puerto "+port+" del ip "+host_ip);
@@ -115,7 +115,7 @@ public class Hospital {
         else {
             try {
             // Asignar ip del host
-            String host = ip37;
+            String host = ip38;
             System.out.println("Intentando conectarse a host: "+host);
             int port = 9090;
             System.out.println("En puerto: "+port);
