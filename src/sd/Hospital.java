@@ -48,9 +48,9 @@ public class Hospital {
         if (nMaquina == 37) {
         // Intentar escuchar en puerto
         try {
-            int port = 25000;
+            int port = 32000;
             ServerSocket serverSocket = new ServerSocket(port);
-            System.out.println("Server Started and listening to the port 25000");
+            System.out.println("Servidor empezado y escuchando en puerto "+port);
  
             // Servidor escucha siempre
             while(true) {
@@ -108,7 +108,9 @@ public class Hospital {
             try {
             // Asignar ip del host
             String host = ip37;
-            int port = 25000;
+            System.out.println("Intentando conectarse a host: "+host);
+            int port = 32000;
+            System.out.println("En puerto: "+port);
             InetAddress address = InetAddress.getByName(host);
             socket = new Socket(address, port);
  
