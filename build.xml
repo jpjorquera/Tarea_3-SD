@@ -5,11 +5,8 @@
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
     <property name="main-class"  value="sd.Hospital"/>
-    <property name="ant.project.name"  value="sd"/>
-
-    <path id="classpath">
-        <fileset dir="${jar.dir}" includes="**/*.jar"/>
-    </path>
+    <property name="ant.project.name"  value="SD"/>
+    <property name="lib.dir"     value="lib"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -30,9 +27,8 @@
     </target>
 
     <target name="run" depends="jar">
-        <java classname="${jar.dir}/${ant.project.name}" fork="true">
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true">
             <classpath>
-                <path refid="classpath"/>
                 <path location="${jar.dir}/${ant.project.name}.jar"/>
             </classpath>
         </java>

@@ -20,5 +20,6 @@ public class Hospital {
                 System.out.println(ip40);
             }
         }
+        System.out.println("Run exitoso");
     }
 }
