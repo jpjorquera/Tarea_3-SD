@@ -122,6 +122,12 @@ public class Hospital {
             InetAddress address = InetAddress.getByName(host);
             socket = new Socket(address, port);
             System.out.println("Creacion exitosa del socket");
+
+            // Try debuggear socket
+            String ip = socket.getInetAddress().getHostAddress();
+            int puerto = socket.getLocalPort();
+            System.out.println("En ip: "+ip+" y puerto: "+Integer.toString(puerto));
+
             // Enviar mensaje al servidor
             OutputStream os = socket.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(os);
