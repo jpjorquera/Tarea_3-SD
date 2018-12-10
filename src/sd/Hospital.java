@@ -52,8 +52,8 @@ public class Hospital {
             //ServerSocket serverSocket = new ServerSocket(port);
             String host_ip = ip37;
             InetAddress address = InetAddress.getByName(host_ip);
-            ServerSocket serverSocket = new ServerSocket(port, 5, address);
-            System.out.println("Servidor empezado y escuchando en puerto "+port);
+            ServerSocket serverSocket = new ServerSocket(port, 10, address);
+            System.out.println("Servidor empezado y escuchando en puerto "+port+" del ip "+host_ip);
  
             // Servidor escucha siempre
             while(true) {
