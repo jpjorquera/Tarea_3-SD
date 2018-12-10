@@ -111,8 +111,7 @@ public class Hospital {
             System.out.println("Intentando conectarse a host: "+host);
             int port = 9090;
             System.out.println("En puerto: "+port);
-            //InetAddress address = InetAddress.getByName(host);
-            InetAddress address = host;
+            InetAddress address = InetAddress.getByName(host);
             socket = new Socket(address, port);
  
             // Enviar mensaje al servidor
