@@ -111,7 +111,7 @@ public class Hospital {
 
         }
         
-        // Si maquina no era numero 37 => cliente
+        // Si maquina no era numero 38 => cliente
         else {
             try {
             // Asignar ip del host
