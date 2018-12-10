@@ -50,7 +50,9 @@ public class Hospital {
         try {
             int port = 9090;
             //ServerSocket serverSocket = new ServerSocket(port);
-            ServerSocket serverSocket = new ServerSocket(port, 5, ip37);
+            String host_ip = ip37;
+            InetAddress address = InetAddress.getByName(host_ip);
+            ServerSocket serverSocket = new ServerSocket(port, 5, adress);
             System.out.println("Servidor empezado y escuchando en puerto "+port);
  
             // Servidor escucha siempre
