@@ -1,3 +1,5 @@
+package sd;
+
 public class Paramedico {
     private String nombre  ;
 

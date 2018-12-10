@@ -1,3 +1,5 @@
+package sd;
+
 public class Enfermero {
     private String nombre  ;
 
