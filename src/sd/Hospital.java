@@ -57,6 +57,11 @@ public class Hospital {
  
             // Servidor escucha siempre
             while(true) {
+                // Checkear ip y puerto
+                ip = serverSocket.getInetAddress();
+                puerto = serverSocket.getLocalPort();
+                System.out.println("En ip: "+ip+" y puerto: "+puerto);
+
                 // Esperar mensaje de cliente
                 socket = serverSocket.accept();
                 InputStream is = socket.getInputStream();
