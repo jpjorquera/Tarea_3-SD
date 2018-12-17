@@ -183,11 +183,12 @@ class CSThread implements Runnable {
 						System.out.println("InputstreamReader");
 						BufferedReader br = new BufferedReader(isr);
 						System.out.println("BufferedReader");
-						String entrada;
-						while (entrada = br.readLine() != null) {
+						String entrada = br.readLine();
+						while (entrada != null) {
 							System.out.println("Lei null en server");
 							Thread.sleep(100);
 							System.out.println("Dormi");
+							entrada = br.readLine();
 						};
 						System.out.println("readline");
 						System.out.println("Recibi en servidor: "+entrada);
