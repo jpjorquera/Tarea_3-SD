@@ -51,9 +51,7 @@ class CSThread implements Runnable {
 	}
 
 	public void insertMsg(String msg) {
-		System.out.println("Entre a insertar con mensaje: "+msg);
 		mensajes.add(msg);
-		System.out.println("Agregue a mensajes");
 	}
 
 	public String getMsg() {
@@ -182,6 +180,8 @@ class CSThread implements Runnable {
 						InputStreamReader isr = new InputStreamReader(is);
 						BufferedReader br = new BufferedReader(isr);
 						String entrada = br.readLine();
+
+						System.out.println("Recibi en servidor: "+entrada);
 						char tipoOrden = entrada.charAt(0);
 
 						String returnMessage = "0";
