@@ -49,9 +49,9 @@ class CSThread implements Runnable {
 	}
 
 	public void insertMsg(String msg) {
-		System.out.println("Entre a insertar")
+		System.out.println("Entre a insertar");
 		mensajes.add(msg);
-		System.out.println("Agregue a mensajes")
+		System.out.println("Agregue a mensajes");
 	}
 
 	public String getMsg() {
