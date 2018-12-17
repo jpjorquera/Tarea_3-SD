@@ -72,7 +72,7 @@ class CSThread implements Runnable {
 						// Try debuggear socket
 						String ip = socket.getInetAddress().getHostAddress();
 						int puerto = socket.getLocalPort();
-						System.out.println("En ip: "+ip+" y puerto: "+Integer.toString(puerto));
+						System.out.println(threadName+" En ip: "+ip+" y puerto: "+Integer.toString(puerto));
 			
 						// Enviar mensaje al servidor
 						OutputStream os = socket.getOutputStream();
@@ -131,7 +131,7 @@ class CSThread implements Runnable {
 						// Checkear ip y puerto
 						String ip = serverSocket.getInetAddress().getHostAddress();
 						int puerto = serverSocket.getLocalPort();
-						System.out.println("En ip: "+ip+" y puerto: "+Integer.toString(puerto));
+						System.out.println("Servidor - En ip: "+ip+" y puerto: "+Integer.toString(puerto));
 		
 						// Esperar mensaje de cliente
 						socket = serverSocket.accept();
