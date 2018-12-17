@@ -227,7 +227,7 @@ class CSThread implements Runnable {
 						OutputStreamWriter osw = new OutputStreamWriter(os);
 						BufferedWriter bw = new BufferedWriter(osw);
 						bw.write(returnMessage);
-						System.out.println("Mensaje enviado al cliente es: "+returnMessage);
+						System.out.println("Mensaje enviado al cliente es: "+returnMessage+"\n");
 						bw.flush();
 					}
 				}
