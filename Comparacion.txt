@@ -1,0 +1,28 @@
+---Comparacion métodos de replicación y consistencia---
+
+
+Respecto al número de mensajes, el primer método es mut efectivo cuando
+la cantidad de mensajes es poca, en relación al tiempo, ya que al
+tener pocos datos que comparar entre las máquinas que envián datos,
+puede generar un orden y replicarlo con mayor flexibilidad.
+No obstante, cuando el envío de mensajes es elevado, puede producir
+saturación en el punto donde se reciben mensajes, que además deben enviarse
+a todos los demás por sólo el coordinador, lo que generará latencia
+considerable dada la cantidad de tiempo que debe esperar por obtener
+los mensajes , sumado a que tiene que enviarlos a cada uno. 
+No obstante, dado que el coordinador se encarga de rececepcionar
+y administrar a detalle cada mensaje recibido y a enviar, garantiza que cada
+máquina posea la misma información, manteniendo consistencia en cada una de ellas.
+Aún así, se debe tener cuidado con los problemas bizantinos, dado que sólo el
+coordinador maneja el envío y replicación a todos, nada garantiza que la transmisión
+sea correcta a las diferentes máquinas a partir de este.
+
+En el segundo método, con un protocolo descentralizado, si la situación
+posee número de mensajes enorme a manejar, el envío de mensajes se distribuye
+por partes iguales en cada máquina, en función de quien haya hecho la modificación
+lo cual genera una latencia menor, en este sentido, comparada al metodo de coordinador.
+El problema ocurre en la consistencia. Dado que la edición
+de los logs depende del uso del protocolo y como se envián la información, el tiempo
+de retraso se encuentra en la comprobación del orden de mensajes en el log. Además
+si existe un metodo implementado de validación de mensajes, los problemas bizantinos
+desaparecen mantiendo la consistencia entre todas las máquinas a costa de tiempo.
