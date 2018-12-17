@@ -205,7 +205,7 @@ class CSThread implements Runnable {
 									if (Integer.parseInt(recibido[1]) < experiencia) {
 										if (Integer.parseInt(recibido[2]) < estudio) {
 											// Soy el  bully
-											insertMsg("1 "+Integer.toString(experiencia)+" "+Integer.toString(estudio));
+											insertMsg("1 "+Integer.toString(experiencia)+" "+Integer.toString(estudio)+"\n");
 											returnMessage = "2";
 										}
 									}

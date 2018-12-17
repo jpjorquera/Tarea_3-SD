@@ -134,7 +134,7 @@ public class Hospital {
         CSThread client3 = new CSThread("cliente 3", cliente3);
 
         // Mensaje primera eleccion
-        String msgInicial = "1 "+Integer.toString(experiencia)+" "+Integer.toString(estudio);
+        String msgInicial = "1 "+Integer.toString(experiencia)+" "+Integer.toString(estudio)+"\n";
         System.out.println("Mensaje inicial: "+msgInicial);
         client1.insertMsg(msgInicial);
         client2.insertMsg(msgInicial);
