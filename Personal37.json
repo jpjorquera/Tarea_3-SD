@@ -6,13 +6,15 @@
 		{"id": 4,"nombre": "Eliecer","apellido": "Zambrano","estudios": 10,"experiencia": 2},
 		{"id": 5,"nombre": "Juan","apellido": "Jorquera","estudios": 7,"experiencia": 4}
 	],
-	"enfermero":[
+
+	"Enfermero":[
 		{"id":1,"nombre": "Alejandra","apellido": "Guerrero","estudios": 4,"experiencia": 5},
 		{"id":2,"nombre": "Roberto","apellido": "Manriquez","estudios": 5,"experiencia": 3},
 		{"id":3,"nombre": "Camila","apellido": "Saez","estudios": 6,"experiencia": 4},
 		{"id":4,"nombre": "Maria","apellido": "Molina","estudios": 5,"experiencia": 5},
 		{"id":5,"nombre": "Fernanda","apellido": "Aguayo","estudios": 6,"experiencia": 5}
 	],
+
 	"Paramedico":[
 		{"id":1,"nombre": "Tomas","apellido": "Perez","estudios": 4,"experiencia": 3},
 		{"id":2,"nombre": "Jacinto","apellido": "Ramirez","estudios": 5,"experiencia": 6},

@@ -86,7 +86,7 @@ public class Hospital {
         // Formular personal hospital
         List doctores = (List) javaRootMapObject.get("Doctor");
         List paramedicos = (List) javaRootMapObject.get("Paramedico");
-        List enfermeros = (List) javaRootMapObject.get("enfermero");
+        List enfermeros = (List) javaRootMapObject.get("Enfermero");
 
         //****INICIALIZAR DOCTORES , ENFERMEROS, PARAMEDICOS*****
 
