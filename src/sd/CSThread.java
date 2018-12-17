@@ -31,6 +31,8 @@ class CSThread implements Runnable {
 	// Datos del mejor doctor en el servidor
 	private int experiencia;
 	private int estudio;
+	// Mantener estado de coordinacion
+	private boolean estadoCoordinacion = false;
    	
 	// Constructor para clientes con ip del servidor esperado
    	CSThread(String name, String ip) {
@@ -46,17 +48,30 @@ class CSThread implements Runnable {
 		estudio = Est;
 	}
 
-	public void intertMsg(String msg) {
+	public void insertMsg(String msg) {
 		mensajes.add(msg);
 	}
 
 	public String getMsg() {
 		if (mensajes.isEmpty()) {
-			return ""
+			return "";
 		}
-		String msg = mensajes.firstElement();
+		String msg = (String) mensajes.firstElement();
 		mensajes.remove(msg);
 		return msg;
+	}
+
+	public boolean getEstadoCoordinacion() {
+		return estadoCoordinacion;
+	}
+
+	public void toogleCoordinacion() {
+		if (estadoCoordinacion) {
+			estadoCoordinacion = false;
+		}
+		else {
+			estadoCoordinacion = true;
+		}
 	}
 
    	// Acciones mientras corre el thread
@@ -111,7 +126,7 @@ class CSThread implements Runnable {
 				*/
 				try {
 					// Extraer mensaje
-					String msg = mensajes.firstElement();
+					String msg = (String) mensajes.firstElement();
 					mensajes.remove(msg);
 					/* Debuggear destino
 					String ip = socket.getInetAddress().getHostAddress();
@@ -163,22 +178,30 @@ class CSThread implements Runnable {
 						InputStreamReader isr = new InputStreamReader(is);
 						BufferedReader br = new BufferedReader(isr);
 						String entrada = br.readLine();
-						String tipoOrden = entrada.charAt(0);
+						char tipoOrden = entrada.charAt(0);
 
-						String returnMessage;
+						String returnMessage = "0";
 						// Realizar accion dependiendo de orden recibida
 						switch (tipoOrden) {
 							// Recibi eleccion del bully
 							case '1':
 								String[] recibido = entrada.split(" ");
 								// Comparar
-								if (recibido[1] < experiencia) {
-									if (recibido[2] < estudio) {
-										mensajes.insert("1"+" "+experiencia+" "+estudio)
-										returnMessage = "2";
+								try { 
+									if (Integer.parseInt(recibido[1]) < experiencia) {
+										if (Integer.parseInt(recibido[2]) < estudio) {
+											// Soy el  bully
+											insertMsg("1"+" "+Integer.toString(experiencia)+" "+Integer.toString(estudio));
+											returnMessage = "2";
+										}
 									}
 								}
-								returnMessage = "0";
+								catch (Exception e) {
+									System.out.println("No correspondia a un numero");
+									System.exit(11);
+								}
+								// Descartar
+								toogleCoordinacion();
 								break;
 						
 							default:

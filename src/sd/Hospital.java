@@ -154,11 +154,14 @@ public class Hospital {
                 continue;
             }
 
-            String tipoOrden = mensaje.charAt(0);
+            char tipoOrden = mensaje.charAt(0);
             switch (tipoOrden) {
                 // Hay que bullear
-                case "1":
-                    
+                case '1':
+                    System.out.println("Hay que bullear: "+mensaje);
+                    client1.insertMsg(mensaje);
+                    client2.insertMsg(mensaje);
+                    client3.insertMsg(mensaje);
                     break;
             
                 default:
