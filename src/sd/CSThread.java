@@ -53,7 +53,7 @@ class CSThread implements Runnable {
 			if (tipo == 0) {
 				System.out.println("Empezando cliente");
 				// Si hay mensajes, actuar
-				if (!mensajes.isEmpty()) {
+				//if (!mensajes.isEmpty()) {
 					try {
 						// Asignar ip del host
 						String host = ipMaquina;
@@ -106,7 +106,7 @@ class CSThread implements Runnable {
 						}
 					}
 
-				}
+				//}
 			}
 			// Servidor
 			else {
