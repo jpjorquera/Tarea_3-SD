@@ -20,9 +20,7 @@ public class Hospital {
     public static final String ip39 = "10.6.40.179";
     public static final String ip40 = "10.6.40.180";
 
-    // Socket para recibir consultas en el servidor
-    private static Socket socket;
-    public static void main (String[] args) {
+    public static void main (String[] args) throws InterruptedException {
         int nMaquina = 0;
         String ipMaquina = "";
         String cliente1 = "";
