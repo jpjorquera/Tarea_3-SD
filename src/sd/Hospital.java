@@ -135,6 +135,7 @@ public class Hospital {
 
         // Mensaje primera eleccion
         String msgInicial = "1 "+Integer.toString(experiencia)+" "+Integer.toString(estudio);
+        System.out.println("Mensaje inicial: "+msgInicial);
         client1.insertMsg(msgInicial);
         client2.insertMsg(msgInicial);
         client3.insertMsg(msgInicial);
