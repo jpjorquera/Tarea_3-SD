@@ -51,6 +51,7 @@ class CSThread implements Runnable {
 			// Realizar acciones dependiendo de si es cliente o servidor
 			// Cliente
 			if (tipo == 0) {
+				System.out.println("Empezando cliente");
 				// Si hay mensajes, actuar
 				if (!mensajes.isEmpty()) {
 					try {
