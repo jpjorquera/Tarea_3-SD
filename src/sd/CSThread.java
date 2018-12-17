@@ -1,6 +1,19 @@
 package sd;
 import java.util.*;
 
+// Librerias para manejo cliente - servidor
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+// Solo servidor
+import java.net.ServerSocket;
+// Solo cliente
+import java.net.InetAddress;
+
 class CSThread implements Runnable {
 	// Constructor
 	private Thread t;
