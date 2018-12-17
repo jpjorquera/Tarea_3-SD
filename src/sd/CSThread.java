@@ -45,7 +45,7 @@ class CSThread implements Runnable {
 		while (!exit) {
 			// Revisar cada 200 milisegundos
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(10000);
 			}
 			catch (Exception e) {};
 			// Realizar acciones dependiendo de si es cliente o servidor
