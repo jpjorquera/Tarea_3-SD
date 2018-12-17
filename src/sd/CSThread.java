@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 // Solo servidor
 import java.net.ServerSocket;
 // Solo cliente
@@ -44,8 +45,35 @@ class CSThread implements Runnable {
 		// Si es cliente, inicializar info de la conexion
 		if (tipo == 0) {
 			String host = ipMaquina;
-			InetAddress address = InetAddress.getByName(host);
-			socket = new Socket(address, port);
+			try {
+				InetAddress address = InetAddress.getByName(host);
+			}
+			catch (UnknownHostException e) {
+				e.printStackTrace();
+				System.out.println("Error al leer host del cliente");
+				System.exit(1);
+			}
+			try {
+				socket = new Socket(address, port);
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("Error al iniciar cliente");
+				System.exit(1);
+			}
+			finally {
+				// Intentar cerrar socket
+				try {
+					if (exit) {
+						socket.close();
+					}
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+					System.out.println("Error al cerrar el socket");
+					System.exit(1);
+				}
+			}
 		}
 		// Salir cuando se indique
 		while (!exit) {
@@ -60,59 +88,37 @@ class CSThread implements Runnable {
 				System.out.println("Empezando cliente");
 				// Si hay mensajes, actuar
 				//if (!mensajes.isEmpty()) {
-					try {
-						// Asignar ip del host
-						/*String host = ipMaquina;
-						//System.out.println("Intentando conectarse a host: "+host);
-						//System.out.println("En puerto: "+port);
-						InetAddress address = InetAddress.getByName(host);
-						socket = new Socket(address, port);
-						System.out.println("Creacion exitosa del socket");
-						*/
-						// Try debuggear socket
-						String ip = socket.getInetAddress().getHostAddress();
-						int puerto = socket.getLocalPort();
-						System.out.println(threadName+" En ip: "+ip+" y puerto: "+Integer.toString(puerto));
-			
-						// Enviar mensaje al servidor
-						OutputStream os = socket.getOutputStream();
-						OutputStreamWriter osw = new OutputStreamWriter(os);
-						BufferedWriter bw = new BufferedWriter(osw);
-			 
-						String number = "2";
-			 
-						String sendMessage = number + "\n";
-						bw.write(sendMessage);
-						bw.flush();
-						System.out.println("Msg sent to server: "+sendMessage);
-			 
-						// Recibir mensaje devuelta
-						InputStream is = socket.getInputStream();
-						InputStreamReader isr = new InputStreamReader(is);
-						BufferedReader br = new BufferedReader(isr);
-						String message = br.readLine();
-						System.out.println("Mensaje recibido del servidor: " +message);
-					}
-			
-					// Error al inicializar server
-					catch (Exception e) {
-						e.printStackTrace();
-						System.out.println("Error al iniciar servidor");
-						System.exit(1);
-					}
-					finally {
-						// Intentar cerrar socket
-						try {
-							if (exit) {
-								socket.close();
-							}
-						}
-						catch(Exception e) {
-							e.printStackTrace();
-							System.out.println("Error al cerrar el socket");
-							System.exit(1);
-						}
-					}
+				// Asignar ip del host
+				/*String host = ipMaquina;
+				//System.out.println("Intentando conectarse a host: "+host);
+				//System.out.println("En puerto: "+port);
+				InetAddress address = InetAddress.getByName(host);
+				socket = new Socket(address, port);
+				System.out.println("Creacion exitosa del socket");
+				*/
+				// Try debuggear socket
+				String ip = socket.getInetAddress().getHostAddress();
+				int puerto = socket.getLocalPort();
+				System.out.println(threadName+" En ip: "+ip+" y puerto: "+Integer.toString(puerto));
+	
+				// Enviar mensaje al servidor
+				OutputStream os = socket.getOutputStream();
+				OutputStreamWriter osw = new OutputStreamWriter(os);
+				BufferedWriter bw = new BufferedWriter(osw);
+		
+				String number = "2";
+		
+				String sendMessage = number + "\n";
+				bw.write(sendMessage);
+				bw.flush();
+				System.out.println("Msg sent to server: "+sendMessage);
+		
+				// Recibir mensaje devuelta
+				InputStream is = socket.getInputStream();
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr);
+				String message = br.readLine();
+				System.out.println("Mensaje recibido del servidor: " +message);
 
 				//}
 			}
