@@ -4,6 +4,7 @@ import java.util.*;
 // Librerias para manejo cliente - servidor
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -89,30 +90,34 @@ class CSThread implements Runnable {
 				socket = new Socket(address, port);
 				System.out.println("Creacion exitosa del socket");
 				*/
-				// Try debuggear socket
-				String ip = socket.getInetAddress().getHostAddress();
-				int puerto = socket.getLocalPort();
-				System.out.println(threadName+" En ip: "+ip+" y puerto: "+Integer.toString(puerto));
-	
-				// Enviar mensaje al servidor
-				OutputStream os = socket.getOutputStream();
-				OutputStreamWriter osw = new OutputStreamWriter(os);
-				BufferedWriter bw = new BufferedWriter(osw);
+				try {
+					String ip = socket.getInetAddress().getHostAddress();
+					int puerto = socket.getLocalPort();
+					System.out.println(threadName+" En ip: "+ip+" y puerto: "+Integer.toString(puerto));
 		
-				String number = "2";
-		
-				String sendMessage = number + "\n";
-				bw.write(sendMessage);
-				bw.flush();
-				System.out.println("Msg sent to server: "+sendMessage);
-		
-				// Recibir mensaje devuelta
-				InputStream is = socket.getInputStream();
-				InputStreamReader isr = new InputStreamReader(is);
-				BufferedReader br = new BufferedReader(isr);
-				String message = br.readLine();
-				System.out.println("Mensaje recibido del servidor: " +message);
-
+					// Enviar mensaje al servidor
+					OutputStream os = socket.getOutputStream();
+					OutputStreamWriter osw = new OutputStreamWriter(os);
+					BufferedWriter bw = new BufferedWriter(osw);
+			
+					String number = "2";
+			
+					String sendMessage = number + "\n";
+					bw.write(sendMessage);
+					bw.flush();
+					System.out.println("Msg sent to server: "+sendMessage);
+			
+					// Recibir mensaje devuelta
+					InputStream is = socket.getInputStream();
+					InputStreamReader isr = new InputStreamReader(is);
+					BufferedReader br = new BufferedReader(isr);
+					String message = br.readLine();
+					System.out.println("Mensaje recibido del servidor: " +message);
+				}
+				catch (IOException e) {
+					System.out.println("IOException en cliente");
+					System.exit(1);
+				}
 				//}
 			}
 			// Servidor
