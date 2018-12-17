@@ -29,8 +29,8 @@ class CSThread implements Runnable {
 	// Socket para recibir consultas en el servidor
 	private Socket socket;
 	// Datos del mejor doctor en el servidor
-	private int experiencia;
-	private int estudio;
+	private int experiencia = 0;
+	private int estudio = 0;
 	// Mantener estado de coordinacion
 	private boolean estadoCoordinacion = false;
    	
@@ -191,7 +191,7 @@ class CSThread implements Runnable {
 									if (Integer.parseInt(recibido[1]) < experiencia) {
 										if (Integer.parseInt(recibido[2]) < estudio) {
 											// Soy el  bully
-											insertMsg("1"+" "+Integer.toString(experiencia)+" "+Integer.toString(estudio));
+											insertMsg("1 "+Integer.toString(experiencia)+" "+Integer.toString(estudio));
 											returnMessage = "2";
 										}
 									}
