@@ -20,152 +20,74 @@ public class Hospital {
     public static final String ip39 = "10.6.40.179";
     public static final String ip40 = "10.6.40.180";
 
-    // Socket para recibir consultas en el servidor
-    private static Socket socket;
-    public static void main (String[] args) {
+    public static void main (String[] args) throws InterruptedException {
         int nMaquina = 0;
+        String ipMaquina = "";
+        String cliente1 = "";
+        String cliente2 = "";
+        String cliente3 = "";
+        // Identificar maquina actual
         for (String s: args) {
             if (s.equals("37")) {
                 System.out.println(ip37);
                 nMaquina = 37;
+                ipMaquina = ip37;
+                cliente1 = ip38;
+                cliente2 = ip39;
+                cliente3 = ip40;
             }
             if (s.equals("38")) {
                 System.out.println(ip38);
                 nMaquina = 38;
+                ipMaquina = ip38;
+                cliente1 = ip37;
+                cliente2 = ip39;
+                cliente3 = ip40;
             }
             if (s.equals("39")) {
                 System.out.println(ip39);
                 nMaquina = 39;
+                ipMaquina = ip39;
+                cliente1 = ip37;
+                cliente2 = ip38;
+                cliente3 = ip40;
             }
             if (s.equals("40")) {
                 System.out.println(ip40);
                 nMaquina = 40;
+                ipMaquina = ip40;
+                cliente1 = ip37;
+                cliente2 = ip38;
+                cliente3 = ip39;
             }
         }
         System.out.println("Run exitoso");
 
-        // Si es maquina 37 => servidor
-        if (nMaquina == 37) {
-        // Intentar escuchar en puerto
-        try {
-            int port = 9090;
-            //ServerSocket serverSocket = new ServerSocket(port);
-            String host_ip = ip37;
-            InetAddress address = InetAddress.getByName(host_ip);
-            ServerSocket serverSocket = new ServerSocket(port, 10, address);
-            System.out.println("Servidor empezado y escuchando en puerto "+port+" del ip "+host_ip);
- 
-            // Servidor escucha siempre
-            while(true) {
-                // Checkear ip y puerto
-                String ip = serverSocket.getInetAddress().getHostAddress();
-                int puerto = serverSocket.getLocalPort();
-                System.out.println("En ip: "+ip+" y puerto: "+Integer.toString(puerto));
+        // Si es maquina 38 => servidor
+        ///if (nMaquina == 38) {
 
-                // Esperar mensaje de cliente
-                socket = serverSocket.accept();
-                InputStream is = socket.getInputStream();
-                InputStreamReader isr = new InputStreamReader(is);
-                BufferedReader br = new BufferedReader(isr);
-                String number = br.readLine();
-                System.out.println("Mensaje recibido del cliente es: "+number);
- 
-                // Tratar de multiplicar por 2 y responder de vuelta
-                String returnMessage;
-                try {
-                    int numberInIntFormat = Integer.parseInt(number);
-                    int returnValue = numberInIntFormat*2;
-                    returnMessage = String.valueOf(returnValue) + "\n";
-                }
-                catch(NumberFormatException e) {
-                    // Entrada no era numero
-                    returnMessage = "Por favor, envie un numero adecuadamente\n";
-                }
- 
-                // Enviando respuesta devuelta
-                OutputStream os = socket.getOutputStream();
-                OutputStreamWriter osw = new OutputStreamWriter(os);
-                BufferedWriter bw = new BufferedWriter(osw);
-                bw.write(returnMessage);
-                System.out.println("Mensaje enviado al cliente es: "+returnMessage);
-                bw.flush();
-            }
-        }
-        // Error al inicializar server
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error al iniciar servidor");
-            System.exit(1);
-        }
-
-        finally {
-            // Intentar cerrar socket
-            try {
-                socket.close();
-            }
-            catch(Exception e){
-                System.out.println("Error al cerrar el socket");
-                System.exit(1);
-            }
-        }
-
-        }
+        //}
         
-        // Si maquina no era numero 37 => cliente
-        else {
-            try {
-            // Asignar ip del host
-            String host = ip37;
-            System.out.println("Intentando conectarse a host: "+host);
-            int port = 9090;
-            System.out.println("En puerto: "+port);
-            InetAddress address = InetAddress.getByName(host);
-            socket = new Socket(address, port);
-            System.out.println("Creacion exitosa del socket");
+        // Si maquina no era numero 38 => cliente
+        //else {
 
-            // Try debuggear socket
-            String ip = socket.getInetAddress().getHostAddress();
-            int puerto = socket.getLocalPort();
-            System.out.println("En ip: "+ip+" y puerto: "+Integer.toString(puerto));
+        //}
+        CSThread servidor = new CSThread("server", 1, ipMaquina);
+        servidor.start();
+        // Esperar inicializacion de otros servidores antes de ejecutar clientes
+        System.out.println("Esperando 20s en Main Thread...");
+        Thread.sleep(20000);
+        // Imprimir clientes hasta ahora
+        System.out.println("Cliente 1: "+cliente1);
+        System.out.println("Cliente 2: "+cliente2);
+        System.out.println("Cliente 3: "+cliente3);
+        // Intentar iniciar clientes
+        CSThread client1 = new CSThread("cliente 1", cliente1);
+        CSThread client2 = new CSThread("cliente 2", cliente2);
+        CSThread client3 = new CSThread("cliente 3", cliente3);
 
-            // Enviar mensaje al servidor
-            OutputStream os = socket.getOutputStream();
-            OutputStreamWriter osw = new OutputStreamWriter(os);
-            BufferedWriter bw = new BufferedWriter(osw);
- 
-            String number = "2";
- 
-            String sendMessage = number + "\n";
-            bw.write(sendMessage);
-            bw.flush();
-            System.out.println("Msg sent to server: "+sendMessage);
- 
-            // Recibir mensaje devuelta
-            InputStream is = socket.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-            String message = br.readLine();
-            System.out.println("Mensaje recibido del servidor: " +message);
-        }
-
-        // Error al inicializar server
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error al iniciar servidor");
-            System.exit(1);
-        }
-        finally {
-            // Intentar cerrar socket
-            try {
-                socket.close();
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-                System.out.println("Error al cerrar el socket");
-                System.exit(1);
-            }
-        }
-
-        }
+        client1.start();
+        client2.start();
+        client3.start();
     }
 }
