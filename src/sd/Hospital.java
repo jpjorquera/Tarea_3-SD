@@ -49,7 +49,7 @@ public class Hospital {
                 cliente1 = ip38;
                 cliente2 = ip39;
                 cliente3 = ip40;
-                nombreArchivoDoctores = "Personal37.json";
+                nombreArchivoPersonal = "Personal37.json";
             }
             if (s.equals("38")) {
                 System.out.println(ip38);
@@ -58,7 +58,7 @@ public class Hospital {
                 cliente1 = ip37;
                 cliente2 = ip39;
                 cliente3 = ip40;
-                nombreArchivoDoctores = "Personal38.json";
+                nombreArchivoPersonal = "Personal38.json";
             }
             if (s.equals("39")) {
                 System.out.println(ip39);
@@ -67,7 +67,7 @@ public class Hospital {
                 cliente1 = ip37;
                 cliente2 = ip38;
                 cliente3 = ip40;
-                nombreArchivoDoctores = "Personal39.json";
+                nombreArchivoPersonal = "Personal39.json";
             }
             if (s.equals("40")) {
                 System.out.println(ip40);
@@ -76,7 +76,7 @@ public class Hospital {
                 cliente1 = ip37;
                 cliente2 = ip38;
                 cliente3 = ip39;
-                nombreArchivoDoctores = "Personal40.json";
+                nombreArchivoPersonal = "Personal40.json";
             }
         }
 
@@ -95,7 +95,6 @@ public class Hospital {
         for (int i = 0; i < doctores.size(); i++) {
             //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
             doctoresV[i] = new Doctor((Map) doctores.get(i)); //Se ingresa un map con los datos del dr
-
         }
 
 
@@ -103,19 +102,21 @@ public class Hospital {
         for (int i = 0; i < paramedicos.size(); i++) {
             //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
             paramV[i] = new Paramedico((Map) enfermeros.get(i)); //Se ingresa un map con losd datos del paramedico
-
         }
 
         Enfermero enfeV[] = new Enfermero[enfermeros.size()];
         for (int i = 0; i < enfermeros.size(); i++) {
             //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
             enfeV[i] = new Enfermero((Map) enfermeros.get(i)); //Se ingresa un map con los del enfermero
-
         }
 
         // Asignar mejor doctor
         Doctor bestdr = mejorDoctor(doctoresV);
-        System.out.println("Fin!"); //punto para debug
+        int experiencia = bestdr.getExp();
+        int estudio = bestdr.getEsp();
+        
+        System.out.println("El mejor doctor es: "+bestdr.getNombre()+bestdr.getApellido()+". Con "+
+        experiencia+" anios de experiencia y "+estudio+" de estudio.");
 
 
         
