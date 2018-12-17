@@ -27,7 +27,10 @@ class CSThread implements Runnable {
 	private String ipMaquina = "";
 	Vector mensajes;
 	// Socket para recibir consultas en el servidor
-    private Socket socket;
+	private Socket socket;
+	// Datos del mejor doctor en el servidor
+	private int experiencia;
+	private int estudio;
    	
 	// Constructor para clientes con ip del servidor esperado
    	CSThread(String name, String ip) {
@@ -35,10 +38,25 @@ class CSThread implements Runnable {
 		  ipMaquina = ip;
 	}
 	// Constructor para servidores con ip en el cual se inicializa
-	CSThread(String name, int type, String ip) {
+	CSThread(String name, int type, String ip, int Exp, int Est) {
 		threadName = name;
 		tipo = type;
 		ipMaquina = ip;
+		experiencia = Exp;
+		estudio = Est;
+	}
+
+	public void intertMsg(String msg) {
+		mensajes.add(msg);
+	}
+
+	public String getMsg() {
+		if (mensajes.isEmpty()) {
+			return ""
+		}
+		String msg = mensajes.firstElement();
+		mensajes.remove(msg);
+		return msg;
 	}
 
    	// Acciones mientras corre el thread
@@ -79,7 +97,7 @@ class CSThread implements Runnable {
 			catch (Exception e) {};
 			// Realizar acciones dependiendo de si es cliente o servidor
 			// Cliente
-			if (tipo == 0) {
+			if (tipo == 0 && !mensajes.isEmpty()) {
 				System.out.println("Empezando cliente");
 				// Si hay mensajes, actuar
 				//if (!mensajes.isEmpty()) {
@@ -92,21 +110,22 @@ class CSThread implements Runnable {
 				System.out.println("Creacion exitosa del socket");
 				*/
 				try {
+					// Extraer mensaje
+					String msg = mensajes.firstElement();
+					mensajes.remove(msg);
+					/* Debuggear destino
 					String ip = socket.getInetAddress().getHostAddress();
 					int puerto = socket.getPort();
 					System.out.println(threadName+" En ip: "+ip+" y puerto: "+Integer.toString(puerto));
-		
+					*/
+
 					// Enviar mensaje al servidor
 					OutputStream os = socket.getOutputStream();
 					OutputStreamWriter osw = new OutputStreamWriter(os);
 					BufferedWriter bw = new BufferedWriter(osw);
-			
-					String number = "2";
-			
-					String sendMessage = number + "\n";
-					bw.write(sendMessage);
+					bw.write(msg);
 					bw.flush();
-					System.out.println("Msg sent to server: "+sendMessage+" from client: "+threadName);
+					System.out.println("Msg sent to server: "+msg+" from client: "+threadName+".");
 			
 					// Recibir mensaje devuelta
 					InputStream is = socket.getInputStream();
@@ -143,19 +162,27 @@ class CSThread implements Runnable {
 						InputStream is = socket.getInputStream();
 						InputStreamReader isr = new InputStreamReader(is);
 						BufferedReader br = new BufferedReader(isr);
-						String number = br.readLine();
-						System.out.println("Mensaje recibido del cliente es: "+number);
-		 
-						// Tratar de multiplicar por 2 y responder de vuelta
+						String entrada = br.readLine();
+						String tipoOrden = entrada.charAt(0);
+
 						String returnMessage;
-						try {
-							int numberInIntFormat = Integer.parseInt(number);
-							int returnValue = numberInIntFormat*2;
-							returnMessage = String.valueOf(returnValue) + "\n";
-						}
-						catch(NumberFormatException e) {
-							// Entrada no era numero
-							returnMessage = "Por favor, envie un numero adecuadamente\n";
+						// Realizar accion dependiendo de orden recibida
+						switch (tipoOrden) {
+							// Recibi eleccion del bully
+							case '1':
+								String[] recibido = entrada.split(" ");
+								// Comparar
+								if (recibido[1] < experiencia) {
+									if (recibido[2] < estudio) {
+										mensajes.insert("1"+" "+experiencia+" "+estudio)
+										returnMessage = "2";
+									}
+								}
+								returnMessage = "0";
+								break;
+						
+							default:
+								break;
 						}
 		 
 						// Enviando respuesta devuelta
