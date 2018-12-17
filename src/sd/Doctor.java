@@ -1,6 +1,6 @@
+package sd;
+
 import com.google.gson.Gson;
-
-
 import java.util.Map;
 
 public class Doctor {

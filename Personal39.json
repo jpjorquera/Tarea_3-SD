@@ -4,21 +4,20 @@
 		{"id": 2,"nombre": "Jimena","apellido": "Ortiz","estudios": 5,"experiencia": 4},
 		{"id": 3,"nombre": "Nadia","apellido": "Sanchez","estudios": 8,"experiencia": 3},
 		{"id": 4,"nombre": "Aaron","apellido": "Ortega","estudios": 5,"experiencia": 5},
-		{"id": 5,"nombre": "Luis","apellido": "Hidalgo","estudios": 9,"experiencia": 2},
-
+		{"id": 5,"nombre": "Luis","apellido": "Hidalgo","estudios": 9,"experiencia": 2}
 	],
-	"enfermero":[
+	"Enfermero":[
 		{"id": 1,"nombre": "Javier","apellido": "Navarro","estudios": 4,"experiencia": 3},
 		{"id": 2,"nombre": "Luis","apellido": "Dominguez","estudios": 5,"experiencia": 5},
 		{"id": 3,"nombre": "Rodrigo","apellido": "Jimenez","estudios": 7,"experiencia": 2},
 		{"id": 4,"nombre": "Martina","apellido": "Diaz","estudios": 3,"experiencia": 5},
-		{"id": 5,"nombre": "Noelia","apellido": "Perez","estudios": 4,"experiencia": 3},
+		{"id": 5,"nombre": "Noelia","apellido": "Perez","estudios": 4,"experiencia": 3}
 	],
 	"Paramedico":[
 		{"id": 1,"nombre": "Gabriela","apellido": "Navarro","estudios": 5,"experiencia": 1},
 		{"id": 2,"nombre": "Beatriz","apellido": "Vazquez","estudios": 4,"experiencia": 2},
 		{"id": 3,"nombre": "Marina","apellido": "Torres","estudios": 6,"experiencia": 3},
 		{"id": 4,"nombre": "Alex","apellido": "Molina","estudios": 7,"experiencia": 2},
-		{"id": 5,"nombre": "Luis","apellido": "Leon","estudios": 4,"experiencia": 5},
+		{"id": 5,"nombre": "Luis","apellido": "Leon","estudios": 4,"experiencia": 5}
 	]
 }

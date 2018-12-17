@@ -1,17 +1,10 @@
 package sd;
 
-// Librerias para manejo cliente - servidor
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-// Solo servidor
-import java.net.ServerSocket;
-// Solo cliente
-import java.net.InetAddress;
+import com.google.gson.*;
+import java.io.*;
+import java.net.URL;
+import java.util.*;
+import java.lang.*;
 
 public class Hospital {
     // Ips asociados a maquinas virtuales
@@ -20,12 +13,33 @@ public class Hospital {
     public static final String ip39 = "10.6.40.179";
     public static final String ip40 = "10.6.40.180";
 
-    public static void main (String[] args) throws InterruptedException {
+    static Doctor mejorDoctor(Doctor[] drs){
+        //Recibe el vector de doctores, lo itera y se escoge el mejor doctor, en funcion de su experiencia solamente
+        int summax = 0;
+        int estudio = 0;
+        Doctor max = null;
+        for (Doctor doctor : drs){
+            if (summax<doctor.getExp()){
+                summax=doctor.getExp();
+                estudio = doctor.getEsp();
+                max=doctor;
+            }
+            else if (summax == doctor.getExp()){
+                if (estudio<doctor.getEsp()){
+                    max = doctor;
+                }
+            }
+        }
+        return max;
+    }
+    public static void main (String[] args) throws InterruptedException, FileNotFoundException {
+        // Inicializacion de variables relativas por maquina
         int nMaquina = 0;
         String ipMaquina = "";
         String cliente1 = "";
         String cliente2 = "";
         String cliente3 = "";
+        String nombreArchivoPersonal = "";
         // Identificar maquina actual
         for (String s: args) {
             if (s.equals("37")) {
@@ -35,6 +49,7 @@ public class Hospital {
                 cliente1 = ip38;
                 cliente2 = ip39;
                 cliente3 = ip40;
+                nombreArchivoPersonal = "Personal37.json";
             }
             if (s.equals("38")) {
                 System.out.println(ip38);
@@ -43,6 +58,7 @@ public class Hospital {
                 cliente1 = ip37;
                 cliente2 = ip39;
                 cliente3 = ip40;
+                nombreArchivoPersonal = "Personal38.json";
             }
             if (s.equals("39")) {
                 System.out.println(ip39);
@@ -51,6 +67,7 @@ public class Hospital {
                 cliente1 = ip37;
                 cliente2 = ip38;
                 cliente3 = ip40;
+                nombreArchivoPersonal = "Personal39.json";
             }
             if (s.equals("40")) {
                 System.out.println(ip40);
@@ -59,19 +76,52 @@ public class Hospital {
                 cliente1 = ip37;
                 cliente2 = ip38;
                 cliente3 = ip39;
+                nombreArchivoPersonal = "Personal40.json";
             }
         }
-        System.out.println("Run exitoso");
 
-        // Si es maquina 38 => servidor
-        ///if (nMaquina == 38) {
+        // Lectura inicial de json 
+        File f = new File(nombreArchivoPersonal);
+        Map javaRootMapObject = new Gson().fromJson(new FileReader(f), Map.class);
+        // Formular personal hospital
+        List doctores = (List) javaRootMapObject.get("Doctor");
+        List paramedicos = (List) javaRootMapObject.get("Paramedico");
+        List enfermeros = (List) javaRootMapObject.get("Enfermero");
 
-        //}
+        //****INICIALIZAR DOCTORES , ENFERMEROS, PARAMEDICOS*****
+
+        Doctor doctoresV[] = new Doctor[doctores.size()];//Vector de doctores a inicializar, de tipo Doctor[].
+
+        for (int i = 0; i < doctores.size(); i++) {
+            //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
+            doctoresV[i] = new Doctor((Map) doctores.get(i)); //Se ingresa un map con los datos del dr
+        }
+
+
+        Paramedico paramV[] = new Paramedico[paramedicos.size()];
+        for (int i = 0; i < paramedicos.size(); i++) {
+            //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
+            paramV[i] = new Paramedico((Map) enfermeros.get(i)); //Se ingresa un map con losd datos del paramedico
+        }
+
+        Enfermero enfeV[] = new Enfermero[enfermeros.size()];
+        for (int i = 0; i < enfermeros.size(); i++) {
+            //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
+            enfeV[i] = new Enfermero((Map) enfermeros.get(i)); //Se ingresa un map con los del enfermero
+        }
+
+        // Asignar mejor doctor
+        Doctor bestdr = mejorDoctor(doctoresV);
+        int experiencia = bestdr.getExp();
+        int estudio = bestdr.getEsp();
         
-        // Si maquina no era numero 38 => cliente
-        //else {
+        System.out.println("El mejor doctor es: "+bestdr.getNombre()+bestdr.getApellido()+". Con "+
+        experiencia+" anios de experiencia y "+estudio+" de estudio.");
 
-        //}
+
+        
+
+        // Inicializacion de servidor y clientes
         CSThread servidor = new CSThread("server", 1, ipMaquina);
         servidor.start();
         // Esperar inicializacion de otros servidores antes de ejecutar clientes
