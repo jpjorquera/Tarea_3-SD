@@ -25,7 +25,7 @@ class CSThread implements Runnable {
 	private int tipo = 0;
 	private int port = 9090;
 	private String ipMaquina = "";
-	Vector mensajes;
+	Vector<String> mensajes;
 	// Socket para recibir consultas en el servidor
 	private Socket socket;
 	// Datos del mejor doctor en el servidor
@@ -49,7 +49,7 @@ class CSThread implements Runnable {
 	}
 
 	public void insertMsg(String msg) {
-		System.out.println("Entre a insertar");
+		System.out.println("Entre a insertar con mensaje: "+msg);
 		mensajes.add(msg);
 		System.out.println("Agregue a mensajes");
 	}
