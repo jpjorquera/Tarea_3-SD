@@ -1,25 +1,24 @@
 {
 	"Doctor":[
-		{"Nombre": "Nicole","Apellido": "Martinez","Estudios": 6,"Experiencia": 4},
-		{"Nombre": "Homero","Apellido": "Sanchez","Estudios": 5,"Experiencia": 3},
-		{"Nombre": "Cesar","Apellido": "Prado","Estudios": 12,"Experiencia": 7},
-		{"Nombre": "Catalina","Apellido": "Varas","Estudios": 6,"Experiencia": 5},
-		{"Nombre": "Alicia","Apellido": "Montero","Estudios": 6,"Experiencia": 3}
+		{"id": 1,"nombre": "Nicole","apellido": "Martinez","estudios": 6,"experiencia": 4},
+		{"id": 2,"nombre": "Homero","apellido": "Sanchez","estudios": 5,"experiencia": 3},
+		{"id": 3,"nombre": "Cesar","apellido": "Prado","estudios": 12,"experiencia": 7},
+		{"id": 4,"nombre": "Catalina","apellido": "Varas","estudios": 6,"experiencia": 5},
+		{"id": 5,"nombre": "Alicia","apellido": "Montero","estudios": 6,"experiencia": 3},
 	],
-	"Enfermero":[
-		{"Nombre": "Alejandra Guerrero"},
-		{"Nombre": "Maria Velazquez"},
-		{"Nombre": "Lidia Vera"},
-		{"Nombre": "Juan Castell"},
-		{"Nombre": "Roberto Gomez"}
+	"enfermero":[
+		{"id": 1,"nombre": "Alejandra","apellido": "Guerrero","estudios": 6,"experiencia": 4},
+		{"id": 2,"nombre": "Maria","apellido": "Velazquez","estudios": 4,"experiencia": 5},
+		{"id": 3,"nombre": "Lidia","apellido": "Vera","estudios": 3,"experiencia": 3},
+		{"id": 4,"nombre": "Juan","apellido": "Castell","estudios": 7,"experiencia": 4},
+		{"id": 5,"nombre": "Roberto","apellido": "Gomez","estudios": 5,"experiencia": 5},
 	],
 	"Paramedico":[
-		{"Nombre": "Jose Cabezas"},
-		{"Nombre": "Gonzalo Huertas"},
-		{"Nombre": "Paula Arco"},
-		{"Nombre": "Lucas Jimenez"},
-		{"Nombre": "Eva Muños"},
-		{"Nombre": "Alicia Flores"},
-		{"Nombre": "Clara Garcia"}
+		{"id": 1,"nombre": "Jose","apellido": "Cabezas","estudios": 4,"experiencia": 4},
+		{"id": 2,"nombre": "Gonzalo","apellido": "Huertas","estudios": 6,"experiencia": 1},
+		{"id": 3,"nombre": "Paula","apellido": "Arco","estudios": 5,"experiencia": 2},
+		{"id": 4,"nombre": "Lucas","apellido": "Jimenez","estudios": 3,"experiencia": 4},
+		{"id": 5,"nombre": "Eva","apellido": "Garcia","estudios": 5,"experiencia": 5},
+
 	]
 }

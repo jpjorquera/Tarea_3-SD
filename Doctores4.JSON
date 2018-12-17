@@ -1,0 +1,23 @@
+{
+	"Doctor":[
+		{"id":1,"nombre": "Martina","apellido": "Aguilar","estudios": 6,"experiencia": 14},
+		{"id":2,"nombre": "Iris","apellido": "Diaz","estudios": 8,"experiencia": 5},
+		{"id":3,"nombre": "Gabriela","apellido": "Blanco","estudios": 7,"experiencia": 9},
+		{"id":4,"nombre": "Omar","apellido": "Morales","estudios": 10,"experiencia": 2},
+		{"id":5,"nombre": "Santiago","apellido": "Gallardo","estudios": 7,"experiencia": 3}
+	],
+	"Enfermero":[
+		{"id":1,"nombre": "Daniel","apellido": "Gutierrez","estudios": 6,"experiencia": 14},
+		{"id":2,"nombre": "Javier","apellido": "Caballero","estudios": 8,"experiencia": 5},
+		{"id":3,"nombre": "Berta","apellido": "Cruz","estudios": 7,"experiencia": 9},
+		{"id":4,"nombre": "Julia","apellido": "Serra","estudios": 10,"experiencia": 2},
+		{"id":5,"nombre": "Ana","apellido": "Ramos","estudios": 7,"experiencia": 3}
+	],
+	"Paramedico":[
+		{"id":1,"nombre": "Blanca","apellido": "Alonso","estudios": 6,"experiencia": 14},
+		{"id":2,"nombre": "Alicia","apellido": "Ortega","estudios": 8,"experiencia": 5},
+		{"id":3,"nombre": "Enrique","apellido": "Mora","estudios": 7,"experiencia": 9},
+		{"id":4,"nombre": "Angel","apellido": "Lopez","estudios": 10,"experiencia": 2},
+		{"id":5,"nombre": "Esteban","apellido": "Quito","estudios": 7,"experiencia": 3}
+	]
+}

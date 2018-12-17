@@ -1,11 +1,31 @@
-package sd;
+import com.google.gson.Gson;
+
+
+import java.util.Map;
 
 public class Doctor {
     private String nombre;
     private String apellido;
+    private int id;
     private int exp;
     private int esp;
 
+    Doctor(Map hash) {
+        this.setId(((Double) hash.get("id")).intValue());
+        this.setNombre((String) hash.get("nombre"));
+        this.setApellido((String) hash.get("apellido"));
+        this.setExp(((Double) hash.get("experiencia")).intValue());
+        this.setEsp(((Double) hash.get("estudios")).intValue());
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -39,3 +59,4 @@ public class Doctor {
         this.nombre = nombre;
     }
 }
+

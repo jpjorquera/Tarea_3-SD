@@ -1,23 +1,23 @@
 {
 	"Doctor":[
-		{"Nombre": "Alan","Apellido": "Britto","Estudios": 10,"Experiencia": 5},
-		{"Nombre": "Armando","Apellido": "Casas","Estudios": 8,"Experiencia": 10},
-		{"Nombre": "Helen","Apellido": "Chufe","Estudios": 15,"Experiencia": 2},
-		{"Nombre": "Eliecer","Apellido": "Zambrano","Estudios": 10,"Experiencia": 2},
-		{"Nombre": "Juan","Apellido": "Jorquera","Estudios": 7,"Experiencia": 4}
+		{"id": 1,"nombre": "Alan","apellido": "Britto","estudios": 10,"experiencia": 5},
+		{"id": 2,"nombre": "Armando","apellido": "Casas","estudios": 8,"experiencia": 10},
+		{"id": 3,"nombre": "Helen","apellido": "Chufe","estudios": 15,"experiencia": 2},
+		{"id": 4,"nombre": "Eliecer","apellido": "Zambrano","estudios": 10,"experiencia": 2},
+		{"id": 5,"nombre": "Juan","apellido": "Jorquera","estudios": 7,"experiencia": 4}
 	],
-	"Enfermero":[
-		{"Nombre": "Alejandra Guerrero"},
-		{"Nombre": "Roberto Nunez"},
-		{"Nombre": "Camila Saez"},
-		{"Nombre": "Maria Molina"},
-		{"Nombre": "Fernanda Reyes"}
+	"enfermero":[
+		{"id":1,"nombre": "Alejandra","apellido": "Guerrero","estudios": 4,"experiencia": 5},
+		{"id":2,"nombre": "Roberto","apellido": "Manriquez","estudios": 5,"experiencia": 3},
+		{"id":3,"nombre": "Camila","apellido": "Saez","estudios": 6,"experiencia": 4},
+		{"id":4,"nombre": "Maria","apellido": "Molina","estudios": 5,"experiencia": 5},
+		{"id":5,"nombre": "Fernanda","apellido": "Aguayo","estudios": 6,"experiencia": 5}
 	],
 	"Paramedico":[
-		{"Nombre": "Tomas Perez"},
-		{"Nombre": "Jacinto Ramirez"},
-		{"Nombre": "Ana Reyes"},
-		{"Nombre": "Alberto Gonzalez"},
-		{"Nombre": "Jesus Roca"}
+		{"id":1,"nombre": "Tomas","apellido": "Perez","estudios": 4,"experiencia": 3},
+		{"id":2,"nombre": "Jacinto","apellido": "Ramirez","estudios": 5,"experiencia": 6},
+		{"id":3,"nombre": "Ana","apellido": "Reyes","estudios": 4,"experiencia": 1},
+		{"id":4,"nombre": "Alberto","apellido": "Gonzales","estudios": 7,"experiencia": 2},
+		{"id":5,"nombre": "Jesus","apellido": "Roca","estudios": 6,"experiencia": 3}
 	]
 }
