@@ -77,6 +77,10 @@ public class Hospital {
         // Esperar inicializacion de otros servidores antes de ejecutar clientes
         System.out.println("Esperando 20s en Main Thread...");
         Thread.sleep(20000);
+        // Imprimir clientes hasta ahora
+        System.out.println("Cliente 1: "+cliente1);
+        System.out.println("Cliente 2: "+cliente2);
+        System.out.println("Cliente 3: "+cliente3);
         // Intentar iniciar clientes
         CSThread client1 = new CSThread("cliente 1", cliente1);
         CSThread client2 = new CSThread("cliente 2", cliente2);
