@@ -38,6 +38,7 @@ class CSThread implements Runnable {
    	CSThread(String name, String ip) {
 		  threadName = name;
 		  ipMaquina = ip;
+		  mensajes = new Vector();
 	}
 	// Constructor para servidores con ip en el cual se inicializa
 	CSThread(String name, int type, String ip, int Exp, int Est) {
@@ -46,6 +47,7 @@ class CSThread implements Runnable {
 		ipMaquina = ip;
 		experiencia = Exp;
 		estudio = Est;
+		mensajes = new Vector();
 	}
 
 	public void insertMsg(String msg) {
