@@ -53,11 +53,18 @@ public class Main {
     }
     static Doctor mejorDoctor(Doctor[] drs){//Recibe el vector de doctores, lo itera y se escoge el mejor doctor, en funcion de su experiencia solamente
         int summax = 0;
+        int estudio = 0;
         Doctor max = null;
         for (Doctor doctor : drs){
             if (summax<doctor.getExp()){
                 summax=doctor.getExp();
+                estudio = doctor.getEsp();
                 max=doctor;
+            }
+            else if (summax == doctor.getExp()){
+                if (estudio<doctor.getEsp()){
+                    max = doctor;
+                }
             }
         }
         return max;
