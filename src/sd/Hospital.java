@@ -77,7 +77,7 @@ public class Hospital {
         CSThread servidor = new CSThread("server", 1, ipMaquina);
         servidor.start();
         // Esperar inicializacion de otros servidores antes de ejecutar clientes
-        Thread.sleep(25000);
+        Thread.sleep(10000);
         // Intentar iniciar clientes
         CSThread client1 = new CSThread("cliente 1", cliente1);
         CSThread client2 = new CSThread("cliente 2", cliente2);
