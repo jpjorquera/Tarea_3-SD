@@ -93,7 +93,7 @@ class CSThread implements Runnable {
 				*/
 				try {
 					String ip = socket.getInetAddress().getHostAddress();
-					int puerto = socket.getLocalPort();
+					int puerto = socket.getPort();
 					System.out.println(threadName+" En ip: "+ip+" y puerto: "+Integer.toString(puerto));
 		
 					// Enviar mensaje al servidor
