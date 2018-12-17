@@ -33,15 +33,20 @@ public class Hospital {
     }
     public static void main (String[] args) throws InterruptedException {
         // Lectura inicial de json
-        URL path = Main.class.getResource("../Doctores1.JSON");
+        URL path = Hospital.class.getResource("../Doctores1.JSON");
+        File f = new File(path.getFile());
+        /*catch(FileNotFoundException e) {
+            System.out.println("Archivo no encontrado");
+            System.exit(1);
+        }*/
+        Map javaRootMapObject = null;
         try {
-            File f = new File(path.getFile());
+            javaRootMapObject = new Gson().fromJson(new FileReader(f), Map.class);
         }
         catch(FileNotFoundException e) {
             System.out.println("Archivo no encontrado");
             System.exit(1);
         }
-        Map javaRootMapObject = new Gson().fromJson(new FileReader(f), Map.class);
         // Formular personal hospital
         List doctores = (List) javaRootMapObject.get("Doctor");
         List paramedicos = (List) javaRootMapObject.get("Paramedico");
