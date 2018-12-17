@@ -21,14 +21,13 @@ public class Main {
         //****INICIALIZAR DOCTORES , ENFERMEROS, PARAMEDICOS*****
 
 
-        Doctor doctoresV[] = new Doctor[doctores.size()];//Vector de doctores a inicializar.
+        Doctor doctoresV[] = new Doctor[doctores.size()];//Vector de doctores a inicializar, de tipo Doctor[].
 
         for (int i = 0; i < doctores.size(); i++) {
             //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
             doctoresV[i] = new Doctor((Map) doctores.get(i)); //Se ingresa un map con los datos del dr
 
         }
-
 
 
         Paramedico paramV[] = new Paramedico[paramedicos.size()];
@@ -46,10 +45,27 @@ public class Main {
         }
 
         //SE CREARON 3 VECTORES, CON LAS INSTANCIAS DE DOCTORES, PARAMEDICOS Y ENFERMEROS
-        System.out.println("Fin!"); //punto para debug
-    }
-}
 
+        Doctor bestdr = mejorDoctor(doctoresV);
+        System.out.println("Fin!"); //punto para debug
+
+
+    }
+    static Doctor mejorDoctor(Doctor[] drs){//Recibe el vector de doctores, lo itera y se escoge el mejor doctor, en funcion de su experiencia solamente
+        int summax = 0;
+        Doctor max = null;
+        for (Doctor doctor : drs){
+            if (summax<doctor.getExp()){
+                summax=doctor.getExp();
+                max=doctor;
+            }
+        }
+        return max;
+
+    }
+
+
+}
 
 
 
