@@ -181,6 +181,9 @@ class CSThread implements Runnable {
 						BufferedReader br = new BufferedReader(isr);
 						String entrada = br.readLine();
 
+						if (entrada == null) {
+							System.out.println("Lei null en server");
+						}
 						System.out.println("Recibi en servidor: "+entrada);
 						char tipoOrden = entrada.charAt(0);
 
