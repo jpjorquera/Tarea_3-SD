@@ -24,6 +24,8 @@ class CSThread implements Runnable {
 	private int port = 9090;
 	private String ipMaquina = "";
 	Vector mensajes;
+	// Socket para recibir consultas en el servidor
+    private static Socket socket;
    	
 	// Constructor para clientes con ip del servidor esperado
    	CSThread(String name, String ip) {
