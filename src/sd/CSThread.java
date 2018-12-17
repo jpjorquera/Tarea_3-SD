@@ -81,7 +81,7 @@ class CSThread implements Runnable {
 		// Si es cliente, inicializar info de la conexion
 		if (tipo == 0) {
 			String host = this.ipMaquina;
-			System.out.println("ipMaquina: "+host);
+			//System.out.println("ipMaquina: "+host);
 			try {
 				InetAddress address = InetAddress.getByName(host);
 				socket = new Socket(address, port);
@@ -176,10 +176,15 @@ class CSThread implements Runnable {
 		
 						// Esperar mensaje de cliente
 						socket = serverSocket.accept();
+						System.out.println("Socket aceptando");
 						InputStream is = socket.getInputStream();
+						System.out.println("Inputstream");
 						InputStreamReader isr = new InputStreamReader(is);
+						System.out.println("InputstreamReader");
 						BufferedReader br = new BufferedReader(isr);
+						System.out.println("BufferedReader");
 						String entrada = br.readLine();
+						System.out.println("readline");
 
 						if (entrada == null) {
 							System.out.println("Lei null en server");
