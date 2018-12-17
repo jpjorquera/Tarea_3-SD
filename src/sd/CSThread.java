@@ -106,7 +106,7 @@ class CSThread implements Runnable {
 					String sendMessage = number + "\n";
 					bw.write(sendMessage);
 					bw.flush();
-					System.out.println("Msg sent to server: "+sendMessage);
+					System.out.println("Msg sent to server: "+sendMessage+" from client: "+threadName);
 			
 					// Recibir mensaje devuelta
 					InputStream is = socket.getInputStream();
