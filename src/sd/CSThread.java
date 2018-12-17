@@ -41,11 +41,17 @@ class CSThread implements Runnable {
 
    	// Acciones mientras corre el thread
 	public void run(){
+		// Si es cliente, inicializar info de la conexion
+		if (tipo == 0) {
+			String host = ipMaquina;
+			InetAddress address = InetAddress.getByName(host);
+			socket = new Socket(address, port);
+		}
 		// Salir cuando se indique
 		while (!exit) {
 			// Revisar cada 200 milisegundos
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(2000);
 			}
 			catch (Exception e) {};
 			// Realizar acciones dependiendo de si es cliente o servidor
@@ -56,13 +62,13 @@ class CSThread implements Runnable {
 				//if (!mensajes.isEmpty()) {
 					try {
 						// Asignar ip del host
-						String host = ipMaquina;
-						System.out.println("Intentando conectarse a host: "+host);
-						System.out.println("En puerto: "+port);
+						/*String host = ipMaquina;
+						//System.out.println("Intentando conectarse a host: "+host);
+						//System.out.println("En puerto: "+port);
 						InetAddress address = InetAddress.getByName(host);
 						socket = new Socket(address, port);
 						System.out.println("Creacion exitosa del socket");
-			
+						*/
 						// Try debuggear socket
 						String ip = socket.getInetAddress().getHostAddress();
 						int puerto = socket.getLocalPort();
@@ -97,7 +103,9 @@ class CSThread implements Runnable {
 					finally {
 						// Intentar cerrar socket
 						try {
-							socket.close();
+							if (exit) {
+								socket.close();
+							}
 						}
 						catch(Exception e) {
 							e.printStackTrace();
@@ -115,7 +123,7 @@ class CSThread implements Runnable {
 					int port = 9090;
 					String host_ip = ipMaquina;
 					InetAddress address = InetAddress.getByName(host_ip);
-					ServerSocket serverSocket = new ServerSocket(port, 10, address);
+					ServerSocket serverSocket = new ServerSocket(port, 15, address);
 					System.out.println("Servidor empezado y escuchando en puerto "+port+" del ip "+host_ip);
 		 
 					// Servidor escucha siempre
