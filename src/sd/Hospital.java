@@ -1,17 +1,9 @@
 package sd;
 
-// Librerias para manejo cliente - servidor
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-// Solo servidor
-import java.net.ServerSocket;
-// Solo cliente
-import java.net.InetAddress;
+import com.google.gson.*;
+import java.io.*;
+import java.net.URL;
+import java.util.*;
 
 public class Hospital {
     // Ips asociados a maquinas virtuales
@@ -20,7 +12,72 @@ public class Hospital {
     public static final String ip39 = "10.6.40.179";
     public static final String ip40 = "10.6.40.180";
 
+    static Doctor mejorDoctor(Doctor[] drs){
+        //Recibe el vector de doctores, lo itera y se escoge el mejor doctor, en funcion de su experiencia solamente
+        int summax = 0;
+        int estudio = 0;
+        Doctor max = null;
+        for (Doctor doctor : drs){
+            if (summax<doctor.getExp()){
+                summax=doctor.getExp();
+                estudio = doctor.getEsp();
+                max=doctor;
+            }
+            else if (summax == doctor.getExp()){
+                if (estudio<doctor.getEsp()){
+                    max = doctor;
+                }
+            }
+        }
+        return max;
+    }
     public static void main (String[] args) throws InterruptedException {
+        // Lectura inicial de json
+        URL path = Main.class.getResource("../Doctores1.JSON");
+        try {
+            File f = new File(path.getFile());
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("Archivo no encontrado");
+            System.exit(1);
+        }
+        Map javaRootMapObject = new Gson().fromJson(new FileReader(f), Map.class);
+        // Formular personal hospital
+        List doctores = (List) javaRootMapObject.get("Doctor");
+        List paramedicos = (List) javaRootMapObject.get("Paramedico");
+        List enfermeros = (List) javaRootMapObject.get("enfermero");
+
+        //****INICIALIZAR DOCTORES , ENFERMEROS, PARAMEDICOS*****
+
+        Doctor doctoresV[] = new Doctor[doctores.size()];//Vector de doctores a inicializar, de tipo Doctor[].
+
+        for (int i = 0; i < doctores.size(); i++) {
+            //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
+            doctoresV[i] = new Doctor((Map) doctores.get(i)); //Se ingresa un map con los datos del dr
+
+        }
+
+
+        Paramedico paramV[] = new Paramedico[paramedicos.size()];
+        for (int i = 0; i < paramedicos.size(); i++) {
+            //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
+            paramV[i] = new Paramedico((Map) enfermeros.get(i)); //Se ingresa un map con losd datos del paramedico
+
+        }
+
+        Enfermero enfeV[] = new Enfermero[enfermeros.size()];
+        for (int i = 0; i < enfermeros.size(); i++) {
+            //**En esta parte,se tomarán los datos de la lista sacada del JSON y se ingresarán al objeto.
+            enfeV[i] = new Enfermero((Map) enfermeros.get(i)); //Se ingresa un map con los del enfermero
+
+        }
+
+        // Asignar mejor doctor
+        Doctor bestdr = mejorDoctor(doctoresV);
+        System.out.println("Fin!"); //punto para debug
+
+
+        // Inicializacion de clientes - servidor para comunicacion maquina
         int nMaquina = 0;
         String ipMaquina = "";
         String cliente1 = "";
