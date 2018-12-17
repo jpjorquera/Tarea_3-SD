@@ -25,26 +25,42 @@ public class Hospital {
     public static void main (String[] args) {
         int nMaquina = 0;
         String ipMaquina = "";
+        String cliente1 = "";
+        String cliente2 = "";
+        String cliente3 = "";
+        // Identificar maquina actual
         for (String s: args) {
             if (s.equals("37")) {
                 System.out.println(ip37);
                 nMaquina = 37;
                 ipMaquina = ip37;
+                cliente1 = ip38;
+                cliente2 = ip39;
+                cliente3 = ip40;
             }
             if (s.equals("38")) {
                 System.out.println(ip38);
                 nMaquina = 38;
                 ipMaquina = ip38;
+                cliente1 = ip37;
+                cliente2 = ip39;
+                cliente3 = ip40;
             }
             if (s.equals("39")) {
                 System.out.println(ip39);
                 nMaquina = 39;
                 ipMaquina = ip39;
+                cliente1 = ip37;
+                cliente2 = ip38;
+                cliente3 = ip40;
             }
             if (s.equals("40")) {
                 System.out.println(ip40);
                 nMaquina = 40;
                 ipMaquina = ip40;
+                cliente1 = ip37;
+                cliente2 = ip38;
+                cliente3 = ip39;
             }
         }
         System.out.println("Run exitoso");
@@ -58,5 +74,17 @@ public class Hospital {
         //else {
 
         //}
+        CSThread servidor = new CSThread("server", 1, ipMaquina);
+        servidor.start();
+        // Esperar inicializacion de otros servidores antes de ejecutar clientes
+        Thread.sleep(25000);
+        // Intentar iniciar clientes
+        CSThread client1 = new CSThread("cliente 1", cliente1);
+        CSThread client2 = new CSThread("cliente 2", cliente2);
+        CSThread client3 = new CSThread("cliente 3", cliente3);
+
+        client1.start();
+        client2.start();
+        client3.start();
     }
 }
