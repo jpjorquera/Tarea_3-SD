@@ -47,21 +47,14 @@ class CSThread implements Runnable {
 			String host = ipMaquina;
 			try {
 				InetAddress address = InetAddress.getByName(host);
-			}
-			catch (UnknownHostException e) {
-				e.printStackTrace();
-				System.out.println("Error al leer host del cliente");
-				System.exit(1);
-			}
-			try {
 				socket = new Socket(address, port);
 			}
-			catch (IOException e) {
+			catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error al iniciar cliente");
 				System.exit(1);
 			}
-			finally {
+			/*finally {
 				// Intentar cerrar socket
 				try {
 					if (exit) {
@@ -73,7 +66,7 @@ class CSThread implements Runnable {
 					System.out.println("Error al cerrar el socket");
 					System.exit(1);
 				}
-			}
+			}*/
 		}
 		// Salir cuando se indique
 		while (!exit) {
