@@ -45,7 +45,8 @@ class CSThread implements Runnable {
 	public void run(){
 		// Si es cliente, inicializar info de la conexion
 		if (tipo == 0) {
-			String host = ipMaquina;
+			String host = this.ipMaquina;
+			System.out.println("ipMaquina: "+host);
 			try {
 				InetAddress address = InetAddress.getByName(host);
 				socket = new Socket(address, port);
