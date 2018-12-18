@@ -122,22 +122,52 @@ public class Hospital {
         
 
         // Inicializacion de servidor y clientes
-        CSThread servidor = new CSThread("server", 1, ipMaquina);
+        CSThread servidor = new CSThread("server", 1, ipMaquina, experiencia, estudio);
         servidor.start();
         // Esperar inicializacion de otros servidores antes de ejecutar clientes
         System.out.println("Esperando 20s en Main Thread...");
         Thread.sleep(20000);
-        // Imprimir clientes hasta ahora
-        System.out.println("Cliente 1: "+cliente1);
-        System.out.println("Cliente 2: "+cliente2);
-        System.out.println("Cliente 3: "+cliente3);
-        // Intentar iniciar clientes
+
+        // Iniciar clientes
         CSThread client1 = new CSThread("cliente 1", cliente1);
         CSThread client2 = new CSThread("cliente 2", cliente2);
         CSThread client3 = new CSThread("cliente 3", cliente3);
 
+        // Mensaje primera eleccion
+        String msgInicial = "1 "+Integer.toString(experiencia)+" "+Integer.toString(estudio)+"\n";
+        System.out.println("Mensaje inicial: "+msgInicial);
+        client1.insertMsg(msgInicial);
+        client2.insertMsg(msgInicial);
+        client3.insertMsg(msgInicial);
+
+        // Empezar clientes
         client1.start();
         client2.start();
         client3.start();
+
+        // Leer mensajes desde el servidor
+        String mensaje;
+        while (true) {
+            mensaje = servidor.getMsg();
+            // No llego nada, esperar e intentar denuevo
+            if (mensaje.equals("")) {
+                Thread.sleep(200);
+                continue;
+            }
+
+            char tipoOrden = mensaje.charAt(0);
+            switch (tipoOrden) {
+                // Hay que bullear
+                case '1':
+                    System.out.println("Hay que bullear: "+mensaje);
+                    client1.insertMsg(mensaje);
+                    client2.insertMsg(mensaje);
+                    client3.insertMsg(mensaje);
+                    break;
+            
+                default:
+                    break;
+            }
+        }
     }
 }

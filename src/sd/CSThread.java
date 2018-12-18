@@ -25,20 +25,55 @@ class CSThread implements Runnable {
 	private int tipo = 0;
 	private int port = 9090;
 	private String ipMaquina = "";
-	Vector mensajes;
+	Vector<String> mensajes;
 	// Socket para recibir consultas en el servidor
-    private Socket socket;
+	private Socket socket;
+	// Datos del mejor doctor en el servidor
+	private int experiencia = 0;
+	private int estudio = 0;
+	// Mantener estado de coordinacion
+	private boolean estadoCoordinacion = false;
    	
 	// Constructor para clientes con ip del servidor esperado
    	CSThread(String name, String ip) {
 		  threadName = name;
 		  ipMaquina = ip;
+		  mensajes = new Vector();
 	}
 	// Constructor para servidores con ip en el cual se inicializa
-	CSThread(String name, int type, String ip) {
+	CSThread(String name, int type, String ip, int Exp, int Est) {
 		threadName = name;
 		tipo = type;
 		ipMaquina = ip;
+		experiencia = Exp;
+		estudio = Est;
+		mensajes = new Vector();
+	}
+
+	public void insertMsg(String msg) {
+		mensajes.add(msg);
+	}
+
+	public String getMsg() {
+		if (mensajes.isEmpty()) {
+			return "";
+		}
+		String msg = (String) mensajes.firstElement();
+		mensajes.remove(msg);
+		return msg;
+	}
+
+	public boolean getEstadoCoordinacion() {
+		return estadoCoordinacion;
+	}
+
+	public void toogleCoordinacion() {
+		if (estadoCoordinacion) {
+			estadoCoordinacion = false;
+		}
+		else {
+			estadoCoordinacion = true;
+		}
 	}
 
    	// Acciones mientras corre el thread
@@ -46,7 +81,7 @@ class CSThread implements Runnable {
 		// Si es cliente, inicializar info de la conexion
 		if (tipo == 0) {
 			String host = this.ipMaquina;
-			System.out.println("ipMaquina: "+host);
+			//System.out.println("ipMaquina: "+host);
 			try {
 				InetAddress address = InetAddress.getByName(host);
 				socket = new Socket(address, port);
@@ -79,7 +114,7 @@ class CSThread implements Runnable {
 			catch (Exception e) {};
 			// Realizar acciones dependiendo de si es cliente o servidor
 			// Cliente
-			if (tipo == 0) {
+			if (tipo == 0 && !mensajes.isEmpty()) {
 				System.out.println("Empezando cliente");
 				// Si hay mensajes, actuar
 				//if (!mensajes.isEmpty()) {
@@ -92,21 +127,22 @@ class CSThread implements Runnable {
 				System.out.println("Creacion exitosa del socket");
 				*/
 				try {
+					// Extraer mensaje
+					String msg = (String) mensajes.firstElement();
+					mensajes.remove(msg);
+					/* Debuggear destino
 					String ip = socket.getInetAddress().getHostAddress();
 					int puerto = socket.getPort();
 					System.out.println(threadName+" En ip: "+ip+" y puerto: "+Integer.toString(puerto));
-		
+					*/
+
 					// Enviar mensaje al servidor
 					OutputStream os = socket.getOutputStream();
 					OutputStreamWriter osw = new OutputStreamWriter(os);
 					BufferedWriter bw = new BufferedWriter(osw);
-			
-					String number = "2";
-			
-					String sendMessage = number + "\n";
-					bw.write(sendMessage);
+					bw.write(msg);
 					bw.flush();
-					System.out.println("Msg sent to server: "+sendMessage+" from client: "+threadName);
+					//System.out.println("Msg sent to server: "+msg+" from client: "+threadName+".");
 			
 					// Recibir mensaje devuelta
 					InputStream is = socket.getInputStream();
@@ -140,22 +176,50 @@ class CSThread implements Runnable {
 		
 						// Esperar mensaje de cliente
 						socket = serverSocket.accept();
+						//System.out.println("Socket aceptando");
 						InputStream is = socket.getInputStream();
+						//System.out.println("Inputstream");
 						InputStreamReader isr = new InputStreamReader(is);
+						//System.out.println("InputstreamReader");
 						BufferedReader br = new BufferedReader(isr);
-						String number = br.readLine();
-						System.out.println("Mensaje recibido del cliente es: "+number);
-		 
-						// Tratar de multiplicar por 2 y responder de vuelta
-						String returnMessage;
-						try {
-							int numberInIntFormat = Integer.parseInt(number);
-							int returnValue = numberInIntFormat*2;
-							returnMessage = String.valueOf(returnValue) + "\n";
-						}
-						catch(NumberFormatException e) {
-							// Entrada no era numero
-							returnMessage = "Por favor, envie un numero adecuadamente\n";
+						//System.out.println("BufferedReader");
+						String entrada = br.readLine();
+						while (entrada != null) {
+							//System.out.println("Lei null en server");
+							Thread.sleep(100);
+							//System.out.println("Dormi");
+							entrada = br.readLine();
+						};
+						//System.out.println("readline");
+						//System.out.println("Recibi en servidor: "+entrada);
+						char tipoOrden = entrada.charAt(0);
+
+						String returnMessage = "0";
+						// Realizar accion dependiendo de orden recibida
+						switch (tipoOrden) {
+							// Recibi eleccion del bully
+							case '1':
+								String[] recibido = entrada.split(" ");
+								// Comparar
+								try { 
+									if (Integer.parseInt(recibido[1]) < experiencia) {
+										if (Integer.parseInt(recibido[2]) < estudio) {
+											// Soy el  bully
+											insertMsg("1 "+Integer.toString(experiencia)+" "+Integer.toString(estudio)+"\n");
+											returnMessage = "2";
+										}
+									}
+								}
+								catch (Exception e) {
+									System.out.println("No correspondia a un numero");
+									System.exit(11);
+								}
+								// Descartar
+								toogleCoordinacion();
+								break;
+						
+							default:
+								break;
 						}
 		 
 						// Enviando respuesta devuelta
@@ -163,7 +227,7 @@ class CSThread implements Runnable {
 						OutputStreamWriter osw = new OutputStreamWriter(os);
 						BufferedWriter bw = new BufferedWriter(osw);
 						bw.write(returnMessage);
-						System.out.println("Mensaje enviado al cliente es: "+returnMessage);
+						System.out.println("Mensaje enviado al cliente es: "+returnMessage+"\n");
 						bw.flush();
 					}
 				}
