@@ -142,7 +142,7 @@ class CSThread implements Runnable {
 					BufferedWriter bw = new BufferedWriter(osw);
 					bw.write(msg);
 					bw.flush();
-					System.out.println("Msg sent to server: "+msg+" from client: "+threadName+".");
+					//System.out.println("Msg sent to server: "+msg+" from client: "+threadName+".");
 			
 					// Recibir mensaje devuelta
 					InputStream is = socket.getInputStream();
@@ -176,22 +176,22 @@ class CSThread implements Runnable {
 		
 						// Esperar mensaje de cliente
 						socket = serverSocket.accept();
-						System.out.println("Socket aceptando");
+						//System.out.println("Socket aceptando");
 						InputStream is = socket.getInputStream();
-						System.out.println("Inputstream");
+						//System.out.println("Inputstream");
 						InputStreamReader isr = new InputStreamReader(is);
-						System.out.println("InputstreamReader");
+						//System.out.println("InputstreamReader");
 						BufferedReader br = new BufferedReader(isr);
-						System.out.println("BufferedReader");
+						//System.out.println("BufferedReader");
 						String entrada = br.readLine();
 						while (entrada != null) {
-							System.out.println("Lei null en server");
+							//System.out.println("Lei null en server");
 							Thread.sleep(100);
-							System.out.println("Dormi");
+							//System.out.println("Dormi");
 							entrada = br.readLine();
 						};
-						System.out.println("readline");
-						System.out.println("Recibi en servidor: "+entrada);
+						//System.out.println("readline");
+						//System.out.println("Recibi en servidor: "+entrada);
 						char tipoOrden = entrada.charAt(0);
 
 						String returnMessage = "0";
